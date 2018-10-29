@@ -19,9 +19,9 @@ server:
 
 spring:
     profiles:
-            active: dev
+        active: dev
     jpa:
-            database: mysql
-            show-sql: true
-            hibernate:
-                ddl-auto: none
+        database: mysql
+        show-sql: true
+        hibernate:
+            ddl-auto: none
