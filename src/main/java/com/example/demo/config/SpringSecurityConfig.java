@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import com.example.demo.security.PasswordEncoderMapper;
+import com.example.demo.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,14 +9,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final CustomAuthenticationProvider authenticationProvider;
+
+    @Autowired
+    public SpringSecurityConfig(CustomAuthenticationProvider authenticationProvider) {
+        this.authenticationProvider = authenticationProvider;
+    }
+
     @Autowired
     public void config(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-                .withUser("root").password("123456davinci")
-                .roles("USER")
-            .and()
-                .passwordEncoder(new PasswordEncoderMapper())
-        ;
+        auth.authenticationProvider(authenticationProvider);
     }
 }
