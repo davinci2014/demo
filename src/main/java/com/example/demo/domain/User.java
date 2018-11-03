@@ -1,6 +1,5 @@
 package com.example.demo.domain;
 
-import antlr.StringUtils;
 import com.example.demo.constants.SystemConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -9,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
