@@ -8,14 +8,12 @@ import com.example.demo.security.AuthoritiesConstants;
 import com.example.demo.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -33,10 +31,10 @@ public class UserService {
         this.authorityRepository = authorityRepository;
     }
 
-    @Cacheable(value = "getUsers")
-    public List<User> getUsers() {
-        return userRepository.findAll();
-    }
+//    @Cacheable(value = "getUsers")
+//    public List<User> getUsers() {
+//        return userRepository.findAll();
+//    }
 
     public Page<UserDTO> getAllUsers(Pageable pageable) {
         return userRepository.findAllByActivatedTrue(pageable).map(UserDTO::new);

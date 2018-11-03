@@ -1,6 +1,5 @@
 package com.example.demo.web.rest;
 
-import com.example.demo.domain.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.AuthoritiesConstants;
 import com.example.demo.service.UserService;

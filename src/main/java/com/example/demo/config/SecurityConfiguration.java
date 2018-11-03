@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -33,6 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
     }
 
+    // 此处需要使用@Bean引入，作用不是为了上面方法中使用
+    // 作用在于使用@Bean将PasswordEncoder作为Bean引入
+    // 同时此方法也可以指定加密方式
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
