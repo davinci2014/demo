@@ -24,4 +24,4 @@ spring:
         database: mysql
         show-sql: true
         hibernate:
-            ddl-auto: none
+            ddl-auto: update
