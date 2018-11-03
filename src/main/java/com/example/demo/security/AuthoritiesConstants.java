@@ -1,4 +1,4 @@
-package com.example.demo.constants;
+package com.example.demo.security;
 
 /**
  * Constants for Spring Security authorities.

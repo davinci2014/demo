@@ -1,6 +1,6 @@
 package com.example.demo.web.rest;
 
-import com.example.demo.constants.AuthoritiesConstants;
+import com.example.demo.security.AuthoritiesConstants;
 import com.example.demo.domain.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

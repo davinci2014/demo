@@ -16,7 +16,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Component
+@Component("userDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final Logger log = LoggerFactory.getLogger(CustomUserDetailsService.class);
