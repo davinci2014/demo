@@ -6,6 +6,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.service.dto.UserDTO;
 import com.example.demo.web.rest.errors.InvalidPasswordException;
 import com.example.demo.web.rest.errors.LoginAlreadyUsedException;
+import com.example.demo.web.rest.util.PaginationUtil;
 import com.example.demo.web.rest.vm.ManagedUserVM;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,10 +43,11 @@ public class UserResource {
     }
 
     @GetMapping("/users")
-    @Secured(AuthoritiesConstants.ADMIN)
+//    @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
         final Page<UserDTO> page = userService.getAllUsers(pageable);
-        return new ResponseEntity<>(page.getContent(), new HttpHeaders(), HttpStatus.OK);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
     private static boolean checkPasswordLength(String password) {
