@@ -24,7 +24,7 @@ public class WebConfiguration {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = applicationProperties.getCors();
         if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
-            log.debug("Registering CORS filter");
+            log.info("Registering CORS filter");
             source.registerCorsConfiguration("/api/**", config);
             source.registerCorsConfiguration("/management/**", config);
             source.registerCorsConfiguration("/v2/api-docs", config);

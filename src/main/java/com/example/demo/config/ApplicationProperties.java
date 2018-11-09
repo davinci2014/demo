@@ -10,7 +10,7 @@ public class ApplicationProperties {
 
     private final Security security = new Security();
     private final CorsConfiguration cors = new CorsConfiguration();
-
+    private final Logging logging = new Logging();
 
     public Security getSecurity() {
         return security;
@@ -18,6 +18,10 @@ public class ApplicationProperties {
 
     public CorsConfiguration getCors() {
         return cors;
+    }
+
+    public Logging getLogging() {
+        return logging;
     }
 
     public static class Security {
@@ -138,6 +142,58 @@ public class ApplicationProperties {
 
             public void setKey(String key) {
                 this.key = key;
+            }
+        }
+    }
+
+    public static class Logging {
+
+        private final Logstash logstash = new Logstash();
+
+        public Logstash getLogstash() {
+            return logstash;
+        }
+
+        public static class Logstash {
+
+            private boolean enabled = ApplicationDefaults.Logging.Logstash.enabled;
+
+            private String host = ApplicationDefaults.Logging.Logstash.host;
+
+            private int port = ApplicationDefaults.Logging.Logstash.port;
+
+            private int queueSize = ApplicationDefaults.Logging.Logstash.queueSize;
+
+            public boolean isEnabled() {
+                return enabled;
+            }
+
+            public void setEnabled(boolean enabled) {
+                this.enabled = enabled;
+            }
+
+            public String getHost() {
+                return host;
+            }
+
+            public void setHost(String host) {
+                this.host = host;
+            }
+
+            public int getPort() {
+                return port;
+            }
+
+            public void setPort(int port) {
+                this.port = port;
+            }
+
+            public int getQueueSize() {
+                return queueSize;
+            }
+
+            public void setQueueSize(int queueSize) {
+                this.queueSize = queueSize;
             }
         }
     }

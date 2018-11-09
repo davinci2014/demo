@@ -7,10 +7,12 @@ import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,6 +23,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
+import javax.annotation.PostConstruct;
+
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Import(SecurityProblemSupport.class)
@@ -30,17 +34,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CorsFilter corsFilter;
     private final SecurityProblemSupport problemSupport;
     private final TokenProvider tokenProvider;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @Autowired
-    public SecurityConfiguration(UserDetailsService userDetailsService, CorsFilter corsFilter, SecurityProblemSupport problemSupport, TokenProvider tokenProvider) {
+    public SecurityConfiguration(UserDetailsService userDetailsService, CorsFilter corsFilter, SecurityProblemSupport problemSupport, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.userDetailsService = userDetailsService;
         this.corsFilter = corsFilter;
         this.problemSupport = problemSupport;
         this.tokenProvider = tokenProvider;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
-    @Autowired
-    public void config(AuthenticationManagerBuilder authenticationManagerBuilder) {
+    @PostConstruct
+    public void init() {
         try {
             authenticationManagerBuilder
                     .userDetailsService(userDetailsService)
@@ -48,6 +54,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         } catch (Exception e) {
             throw new BeanInitializationException("Security configuration failed", e);
         }
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     // 此处需要使用@Bean引入，作用不是为了上面方法中使用
@@ -58,10 +70,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .antMatchers("/app/**/*.{js,html}")
+                .antMatchers("/i18n/**")
+                .antMatchers("/content/**")
+                .antMatchers("/swagger-ui/index.html")
+                .antMatchers("/test/**")
+                .antMatchers("/h2-console/**");
     }
 
     @Override

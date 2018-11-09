@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        log.debug("Authenticating {}", s);
+        log.info("Authenticating {}", s);
 
         String lowercaseLogin = s.toLowerCase(Locale.ENGLISH);
         Optional<User> userByLoginFromDatabase = userRepository.findOneWithAuthoritiesByLogin(lowercaseLogin);

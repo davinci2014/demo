@@ -25,7 +25,7 @@ public class AccountResource {
      */
     @GetMapping("/authenticate")
     public String isAuthenticated(HttpServletRequest request) {
-        log.debug("REST request to check if the current user is authenticated");
+        log.info("REST request to check if the current user is authenticated");
         return request.getRemoteUser();
     }
 }

@@ -14,10 +14,16 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
+logging:
+    level:
+        ROOT: INFO
+
 server:
     port: 8081
 
 spring:
+    application:
+        name: demoApplication
     profiles:
         active: dev
     jpa:
