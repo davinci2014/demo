@@ -42,3 +42,18 @@ spring:
 #        cluster:
 #            max-redirects: # 在群集中执行命令时要遵循的最大重定向数目。
 #            nodes: # （普通集群，不使用则不用开启）以逗号分隔的“主机：端口”对列表进行引导。
+application:
+    cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+        allowed-headers: "*"
+        exposed-headers: "Authorization,Link,X-Total-Count"
+        allow-credentials: true
+        max-age: 1800
+    security:
+        authentication:
+            jwt:
+                secret: my-secret-token-to-change-in-production
+                # Token is valid 24 hours
+                token-validity-in-seconds: 86400
+                token-validity-in-seconds-for-remember-me: 2592000
