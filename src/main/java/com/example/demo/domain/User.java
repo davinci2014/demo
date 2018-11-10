@@ -34,9 +34,14 @@ public class User extends AbstractBaseEntity implements Serializable {
     @Column(name = "password", length = 60, nullable = false)
     private String password;
 
+    @NotNull
     @Size(max = 50)
     @Column(name = "nickname", length = 50)
     private String nickname;
+
+    @NotNull
+    @Column(length = 60, nullable = false)
+    private String phoneNumber;
 
     @NotNull
     @Column(nullable = false)
@@ -72,6 +77,14 @@ public class User extends AbstractBaseEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getNickname() {
@@ -120,6 +133,7 @@ public class User extends AbstractBaseEntity implements Serializable {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", activated=" + activated +
                 ", authorities=" + authorities +
                 '}';

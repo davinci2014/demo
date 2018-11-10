@@ -27,13 +27,13 @@ import java.util.Collections;
  */
 @RestController
 @RequestMapping("/api")
-public class UserJWTResource {
+public class UserJWTController {
 
     private final TokenProvider tokenProvider;
 
     private final AuthenticationManager authenticationManager;
 
-    public UserJWTResource(TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
+    public UserJWTController(TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
         this.tokenProvider = tokenProvider;
         this.authenticationManager = authenticationManager;
     }

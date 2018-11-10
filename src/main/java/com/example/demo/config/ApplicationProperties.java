@@ -197,4 +197,8 @@ public class ApplicationProperties {
             }
         }
     }
+
+    public static class Sms {
+
+    }
 }

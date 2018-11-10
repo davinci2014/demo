@@ -19,8 +19,14 @@ public class UserDTO {
     @Size(min = 1, max = 50)
     private String login;
 
+    @NotBlank
     @Size(max = 50)
     private String nickname;
+
+    @NotBlank
+    @Pattern(regexp = SystemConstants.REGEX_PHONE)
+    @Size(min = 11, max = 11)
+    private String phoneNumber;
 
     private boolean activated = false;
 
@@ -42,6 +48,7 @@ public class UserDTO {
         this.id = user.getId();
         this.login = user.getLogin();
         this.nickname = user.getNickname();
+        this.phoneNumber = user.getPhoneNumber();
         this.activated = user.isActivated();
         this.createdBy = user.getCreatedBy();
         this.createdDate = user.getCreatedDate();
@@ -124,12 +131,21 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", nickname='" + nickname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", activated=" + activated +
                 ", createdBy='" + createdBy + '\'' +
                 ", createdDate=" + createdDate +
