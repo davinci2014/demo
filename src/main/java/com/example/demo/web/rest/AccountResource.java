@@ -5,18 +5,14 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.SmsService;
 import com.example.demo.service.UserService;
 import com.example.demo.service.dto.UserDTO;
+import com.example.demo.service.mapper.UserMapper;
 import com.example.demo.web.rest.errors.BadRequestAlertException;
-import com.example.demo.web.rest.errors.InvalidPasswordException;
 import com.example.demo.web.rest.errors.LoginAlreadyUsedException;
 import com.example.demo.web.rest.util.HeaderUtil;
-import com.example.demo.web.rest.util.VerificationUtil;
 import com.example.demo.web.rest.vm.ManagedUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,11 +32,13 @@ public class AccountResource {
     private final UserRepository userRepository;
     private final UserService userService;
     private final SmsService smsService;
+    private final UserMapper userMapper;
 
-    public AccountResource(UserRepository userRepository, UserService userService, SmsService smsService) {
+    public AccountResource(UserRepository userRepository, UserService userService, SmsService smsService, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.smsService = smsService;
+        this.userMapper = userMapper;
     }
 
     /**
@@ -72,7 +70,7 @@ public class AccountResource {
 
             return ResponseEntity.created(new URI("/api/users/" + managedUserVM.getLogin()))
                     .headers(HeaderUtil.createAlert( "userManagement.created", managedUserVM.getLogin()))
-                    .body(managedUserVM);
+                    .body(this.userMapper.userToUserDTO(user));
         }
     }
 

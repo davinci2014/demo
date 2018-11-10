@@ -1,6 +1,5 @@
 package com.example.demo.config;
 
-import com.example.demo.security.AuthoritiesConstants;
 import com.example.demo.security.jwt.JWTConfigurer;
 import com.example.demo.security.jwt.TokenProvider;
 import org.springframework.beans.factory.BeanInitializationException;
