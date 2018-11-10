@@ -38,4 +38,28 @@ public interface ApplicationDefaults {
             int queueSize = 512;
         }
     }
+
+    interface Aliyun {
+
+        interface Sms {
+
+            String product = "Dysmsapi";
+            String domain = "dysmsapi.aliyuncs.com";
+            String accessKey = null;
+            String accessSecret = null;
+            String signName = null;
+
+            interface Templates {
+                String register = null;
+                String login = null;
+            }
+        }
+    }
+
+    interface Async {
+
+        int corePoolSize = 2;
+        int maxPoolSize = 50;
+        int queueCapacity = 10000;
+    }
 }

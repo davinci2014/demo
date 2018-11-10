@@ -13,9 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Base64;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,7 +39,7 @@ public class UserService {
         return userRepository.findAllByActivatedTrue(pageable).map(UserDTO::new);
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User createUser(UserDTO userDTO, String password) {
         User newUser = new User();
         newUser.setLogin(userDTO.getLogin());
         newUser.setPassword(passwordEncoder.encode(password));
