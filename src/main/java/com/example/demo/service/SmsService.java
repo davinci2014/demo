@@ -31,7 +31,7 @@ public class SmsService {
 
     @Async
     public void sendRegisterSms(String phoneNumber, String nickname) {
-        log.debug("Sending register sms to '{}' started.", phoneNumber);
+        log.info("Sending register sms to '{}' started.", phoneNumber);
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("nickname", nickname);
 

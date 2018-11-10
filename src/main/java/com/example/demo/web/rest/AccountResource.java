@@ -56,9 +56,9 @@ public class AccountResource {
      * @throws LoginAlreadyUsedException 400 (Bad Request) if the login is already used
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/users")
+    @PostMapping("/register")
     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody ManagedUserVM managedUserVM) throws URISyntaxException {
-        log.debug("REST request to create User : {}", managedUserVM);
+        log.info("REST request to create User : {}", managedUserVM);
 
         if (managedUserVM.getId() != null) {
             throw new BadRequestAlertException("A new user cannot already have an ID", "userManagement", "idexists");
