@@ -19,7 +19,7 @@ logging:
         ROOT: INFO
 
 server:
-    port: 8082
+    port: 8080
 
 spring:
     application:
