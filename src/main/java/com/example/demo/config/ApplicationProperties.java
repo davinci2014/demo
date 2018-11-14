@@ -11,6 +11,8 @@ public class ApplicationProperties {
     private final Security security = new Security();
     private final CorsConfiguration cors = new CorsConfiguration();
     private final Logging logging = new Logging();
+    private final Aliyun aliyun = new Aliyun();
+    private final Async async = new Async();
 
     public Security getSecurity() {
         return security;
@@ -22,6 +24,14 @@ public class ApplicationProperties {
 
     public Logging getLogging() {
         return logging;
+    }
+
+    public Aliyun getAliyun() {
+        return aliyun;
+    }
+
+    public Async getAsync() {
+        return async;
     }
 
     public static class Security {
@@ -198,7 +208,124 @@ public class ApplicationProperties {
         }
     }
 
-    public static class Sms {
+    public static class Aliyun {
+        private final Sms sms = new Sms();
 
+        public Sms getSms() {
+            return sms;
+        }
+
+        public static class Sms {
+            // 短信API产品名称
+            private String product = ApplicationDefaults.Aliyun.Sms.product;
+            // 短信API产品域名
+            private String domain = ApplicationDefaults.Aliyun.Sms.domain;
+
+            private String accessKey = ApplicationDefaults.Aliyun.Sms.accessKey;
+
+            private String accessSecret = ApplicationDefaults.Aliyun.Sms.accessSecret;
+
+            private String signName = ApplicationDefaults.Aliyun.Sms.signName;
+
+            private final Templates templates = new Templates();
+
+            public String getProduct() {
+                return product;
+            }
+
+            public void setProduct(String product) {
+                this.product = product;
+            }
+
+            public String getDomain() {
+                return domain;
+            }
+
+            public void setDomain(String domain) {
+                this.domain = domain;
+            }
+
+            public String getAccessKey() {
+                return accessKey;
+            }
+
+            public void setAccessKey(String accessKey) {
+                this.accessKey = accessKey;
+            }
+
+            public String getAccessSecret() {
+                return accessSecret;
+            }
+
+            public void setAccessSecret(String accessSecret) {
+                this.accessSecret = accessSecret;
+            }
+
+            public String getSignName() {
+                return signName;
+            }
+
+            public void setSignName(String signName) {
+                this.signName = signName;
+            }
+
+            public Templates getTemplates() {
+                return templates;
+            }
+
+            public static class Templates {
+                private String register = ApplicationDefaults.Aliyun.Sms.Templates.register;
+                private String login = ApplicationDefaults.Aliyun.Sms.Templates.login;
+
+                public String getRegister() {
+                    return register;
+                }
+
+                public void setRegister(String register) {
+                    this.register = register;
+                }
+
+                public String getLogin() {
+                    return login;
+                }
+
+                public void setLogin(String login) {
+                    this.login = login;
+                }
+            }
+        }
+    }
+
+    public static class Async {
+
+        private int corePoolSize = ApplicationDefaults.Async.corePoolSize;
+
+        private int maxPoolSize = ApplicationDefaults.Async.maxPoolSize;
+
+        private int queueCapacity = ApplicationDefaults.Async.queueCapacity;
+
+        public int getCorePoolSize() {
+            return corePoolSize;
+        }
+
+        public void setCorePoolSize(int corePoolSize) {
+            this.corePoolSize = corePoolSize;
+        }
+
+        public int getMaxPoolSize() {
+            return maxPoolSize;
+        }
+
+        public void setMaxPoolSize(int maxPoolSize) {
+            this.maxPoolSize = maxPoolSize;
+        }
+
+        public int getQueueCapacity() {
+            return queueCapacity;
+        }
+
+        public void setQueueCapacity(int queueCapacity) {
+            this.queueCapacity = queueCapacity;
+        }
     }
 }

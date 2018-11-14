@@ -53,7 +53,21 @@ application:
     security:
         authentication:
             jwt:
-                secret: my-secret-token-to-change-in-production
+                secret: my-secret-token-to-change-in-test
                 # Token is valid 24 hours
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
+    logging:
+        logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+            enabled: false
+            host: localhost
+            port: 5000
+            queue-size: 512
+    aliyun:
+        sms:
+            access-key: my-aliyun-sms-access-key-id
+            access-secret: my-aliyun-sms-access-key-secret
+            sign-name: my-aliyun-sms-sign-name
+            templates:
+                register: SMS_100000000
+                login: SMS_100000000
