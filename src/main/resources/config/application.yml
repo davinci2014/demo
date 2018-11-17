@@ -30,9 +30,4 @@ spring:
         database: mysql
         show-sql: true
         hibernate:
-            ddl-auto: update
-application:
-    async:
-        core-pool-size: 2
-        max-pool-size: 50
-        queue-capacity: 10000
+            ddl-auto: create
