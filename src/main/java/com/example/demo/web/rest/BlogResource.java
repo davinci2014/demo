@@ -1,8 +1,8 @@
 package com.example.demo.web.rest;
 
-import com.example.demo.domain.Blog;
 import com.example.demo.security.AuthoritiesConstants;
 import com.example.demo.service.BlogService;
+import com.example.demo.service.dto.BlogDTO;
 import com.example.demo.web.rest.util.PaginationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +27,8 @@ public class BlogResource {
 
     @GetMapping("/blogs")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<List<Blog>> getAllBlogs(Pageable pageable) {
-        final Page<Blog> page = blogService.getAllBlogs(pageable);
+    public ResponseEntity<List<BlogDTO>> getAllBlogs(Pageable pageable) {
+        final Page<BlogDTO> page = blogService.getAllBlogs(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/blogs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
