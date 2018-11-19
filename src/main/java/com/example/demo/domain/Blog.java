@@ -104,9 +104,9 @@ public class Blog extends AbstractBaseEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Content{" +
+        return "Blog{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", title='" + title + "\'" +
                 ", content='" + content + '\'' +
                 ", user=" + user +
                 ", original=" + original +
