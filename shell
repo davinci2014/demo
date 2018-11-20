@@ -1,0 +1,17 @@
+# 这个shell脚本是本地常用命令的一个记录
+# ps. 原本想使用teamcity或者是jenkins, but!!! 从入门到放弃!!
+
+# 执行打包命令
+mvn clean package -Dmaven.test.skip=true
+
+# 删除项目
+rm /root/project/demo-backend/demo-0.0.1-SNAPSHOT.jar
+
+# 上传项目
+scp /target/demo-0.0.1-SNAPSHOT.jar root@47.244.44.33:/root/project/demo-backend/
+
+# 删除进程
+ps -ef | grep demo-0.0.1-SNAPSHOT | grep -v grep | awk '{print $2}'|xargs kill -9
+
+# 后台启动运行
+nohup java -jar demo-0.0.1-SNAPSHOT.jar > nohup.out 2>&1 & 
