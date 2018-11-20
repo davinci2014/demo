@@ -1,8 +1,8 @@
 package com.example.demo.web.rest;
 
-import com.example.demo.domain.Content;
+import com.example.demo.domain.Blog;
 import com.example.demo.security.AuthoritiesConstants;
-import com.example.demo.service.ContentService;
+import com.example.demo.service.BlogService;
 import com.example.demo.web.rest.util.PaginationUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,18 +18,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class ContentResource {
-    private ContentService contentService;
+public class BlogResource {
+    private BlogService blogService;
 
-    public ContentResource(ContentService contentService) {
-        this.contentService = contentService;
+    public BlogResource(BlogService blogService) {
+        this.blogService = blogService;
     }
 
-    @GetMapping("/contents")
+    @GetMapping("/blogs")
     @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<List<Content>> getAllContents(Pageable pageable) {
-        final Page<Content> page = contentService.getAllContents(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contents");
+    public ResponseEntity<List<Blog>> getAllBlogs(Pageable pageable) {
+        final Page<Blog> page = blogService.getAllBlogs(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/blogs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 }
