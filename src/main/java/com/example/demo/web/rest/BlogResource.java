@@ -10,9 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +29,13 @@ public class BlogResource {
         final Page<BlogDTO> page = blogService.getAllBlogs(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/blogs");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/blog/{id}")
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<Void> deleteBlogById(@PathVariable Long id) {
+        blogService.deleteBlogById(id);
+
+        return ResponseEntity.ok().header("A blog is deleted with id " + id).build();
     }
 }

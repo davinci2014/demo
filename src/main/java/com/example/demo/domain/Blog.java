@@ -42,10 +42,6 @@ public class Blog extends AbstractBaseEntity implements Serializable {
     @Column(name = "original_url")
     private String originalUrl;
 
-    @NotNull
-    @Column(nullable = false)
-    private boolean activated = false;
-
     public Long getId() {
         return id;
     }
@@ -94,14 +90,6 @@ public class Blog extends AbstractBaseEntity implements Serializable {
         this.originalUrl = originalUrl;
     }
 
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
-
     @Override
     public String toString() {
         return "Blog{" +
@@ -111,7 +99,6 @@ public class Blog extends AbstractBaseEntity implements Serializable {
                 ", user=" + user +
                 ", original=" + original +
                 ", originalUrl='" + originalUrl + '\'' +
-                ", activated=" + activated +
                 '}';
     }
 }

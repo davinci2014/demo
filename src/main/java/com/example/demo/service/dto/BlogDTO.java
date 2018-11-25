@@ -23,8 +23,6 @@ public class BlogDTO {
     @NotNull
     private User user;
 
-    private boolean activated = false;
-
     private String createdBy;
 
     private Instant createdDate;
@@ -63,14 +61,6 @@ public class BlogDTO {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
     }
 
     public String getCreatedBy() {
@@ -112,7 +102,6 @@ public class BlogDTO {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", user=" + user +
-                ", activated=" + activated +
                 ", createdBy='" + createdBy + '\'' +
                 ", createdDate=" + createdDate +
                 ", lastModifiedBy='" + lastModifiedBy + '\'' +
@@ -128,7 +117,6 @@ public class BlogDTO {
         this.title = blog.getTitle();
         this.content = blog.getContent();
         this.user = blog.getUser();
-        this.activated = blog.isActivated();
         this.createdBy = blog.getCreatedBy();
         this.createdDate = blog.getCreatedDate();
         this.lastModifiedBy = blog.getLastModifiedBy();

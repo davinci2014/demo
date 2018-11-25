@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 /**
  * Created by lin on 2018/11/12.
  */
@@ -20,6 +22,13 @@ public class BlogService {
     }
 
     public Page<BlogDTO> getAllBlogs(Pageable pageable) {
-        return blogRepository.findAllByActivatedTrue(pageable).map(BlogDTO::new);
+        return blogRepository.findAll(pageable).map(BlogDTO::new);
+    }
+
+    public void deleteBlogById(Long id) {
+        blogRepository.findById(id).ifPresent(blog -> {
+            blogRepository.delete(blog);
+            System.out.println("delete succeed");
+        });
     }
 }
