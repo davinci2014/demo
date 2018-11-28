@@ -2,13 +2,10 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Blog;
 import com.example.demo.repository.BlogRepository;
-import com.example.demo.service.dto.BlogDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 /**
  * Created by lin on 2018/11/12.
@@ -22,6 +19,8 @@ public class BlogService {
         this.blogRepository = blogRepository;
     }
 
+    public Page<Blog> getAllBlogs(Pageable pageable) {
+        return blogRepository.findAllByActivatedTrue(pageable);
     public Page<BlogDTO> getAllBlogs(Pageable pageable) {
         return blogRepository.findAll(pageable).map(BlogDTO::new);
     }
