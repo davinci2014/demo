@@ -106,3 +106,24 @@ void deleteUser(int id);
 @PreAuthorize("hasRole('ROLE_MANAGER') AND hasRole('ROLE_USER') AND hasRole('ROLE_GUEST')")
 void deleteUser(int id);
 ```
+ 
+### Some Exceptions
+#### Exception in Spring Boot Startup 
+- `Cannot find changelog location: class path resource [db/changelog/db.changelog-master.yaml] (please add changelog or check your Liquibase configuration)`
+
+    Because of using Liquibase, it needs a changelog file. If current project do not config it, it will find by default in 'classpath:./db/changelog/db.changelog-master.yaml'.
+ So create a changelog file, and config it in file application.properties.
+ 
+### About Build
+#### Get Properties File
+- `The subpath /config under the current path`
+- `Current path`
+- `Path /config in the classpath`
+- `Root path in classpath`
+
+    put the application.properties in above four items, project can find and read it.
+    
+### Other Tips
+
+#### Show/Hide the hidden files in Mac
+`command+shift+.`

@@ -26,8 +26,5 @@ spring:
         name: demoApplication
     profiles:
         active: dev
-    jpa:
-        database: mysql
-        show-sql: true
-        hibernate:
-            ddl-auto: update
+    liquibase:
+      change-log: classpath:./liquibase/master.xml
