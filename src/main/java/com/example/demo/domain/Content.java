@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,8 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "content")
-public class Content extends AbstractBaseEntity implements Serializable {
+@Table(name = "blog")
+public class Blog extends AbstractBaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -27,9 +29,11 @@ public class Content extends AbstractBaseEntity implements Serializable {
     @Column(name = "content")
     private String content;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
     @NotNull
-    @Column(name = "user_id")
-    private Long userId;
+    @JsonIgnore
+    private User user;
 
     @NotNull
     @Column(nullable = false, name = "original")
@@ -37,10 +41,6 @@ public class Content extends AbstractBaseEntity implements Serializable {
 
     @Column(name = "original_url")
     private String originalUrl;
-
-    @NotNull
-    @Column(nullable = false)
-    private boolean activated = false;
 
     public Long getId() {
         return id;
@@ -66,12 +66,12 @@ public class Content extends AbstractBaseEntity implements Serializable {
         this.content = content;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Boolean getOriginal() {
@@ -90,24 +90,15 @@ public class Content extends AbstractBaseEntity implements Serializable {
         this.originalUrl = originalUrl;
     }
 
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
-
     @Override
     public String toString() {
-        return "Content{" +
+        return "Blog{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", title='" + title + "\'" +
                 ", content='" + content + '\'' +
-                ", userId=" + userId +
+                ", user=" + user +
                 ", original=" + original +
                 ", originalUrl='" + originalUrl + '\'' +
-                ", activated=" + activated +
                 '}';
     }
 }
