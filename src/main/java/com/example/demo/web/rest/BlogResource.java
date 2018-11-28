@@ -1,5 +1,6 @@
 package com.example.demo.web.rest;
 
+import com.example.demo.domain.Blog;
 import com.example.demo.security.AuthoritiesConstants;
 import com.example.demo.service.BlogService;
 import com.example.demo.service.dto.BlogDTO;
@@ -37,5 +38,14 @@ public class BlogResource {
         blogService.deleteBlogById(id);
 
         return ResponseEntity.ok().header("A blog is deleted with id " + id).build();
+    }
+
+    @PostMapping("/blog")
+    @Secured(AuthoritiesConstants.ADMIN)
+    public ResponseEntity<Void> saveBlog(@RequestBody Blog blog) {
+        System.out.println(blog.toString());
+        blog.setCreatedBy("2");
+        blogService.saveBlog(blog);
+        return ResponseEntity.ok().header("a blog is created").build();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.Blog;
 import com.example.demo.repository.BlogRepository;
 import com.example.demo.service.dto.BlogDTO;
 import org.springframework.data.domain.Page;
@@ -30,5 +31,9 @@ public class BlogService {
             blogRepository.delete(blog);
             System.out.println("delete succeed");
         });
+    }
+
+    public void saveBlog(Blog blog) {
+        blogRepository.save(blog);
     }
 }
