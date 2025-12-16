@@ -1,7 +1,7 @@
 # demo
 
 ### 使用.yml代替.properties文件
-找到application.properties文件，修改文件名为application.yml即可
+找到application.properties文件，修改文件名为application.yml即可[^1]
 
 ### 根据不同的环境使用不同的配置文件
 在SpringBoot中，根据不同环境使用不同的配置文件也极为简单。
